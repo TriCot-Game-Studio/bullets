@@ -48,24 +48,24 @@ while True:
                 _quit()
 
             # Adjust player velocity on keydown
-            elif event.key == pygame.K_DOWN:
+            elif event.key in [pygame.K_DOWN, pygame.K_s]:
                 player.dy += 1
-            elif event.key == pygame.K_UP:
+            elif event.key in [pygame.K_UP, pygame.K_w]:
                 player.dy -= 1
-            elif event.key == pygame.K_RIGHT:
+            elif event.key in [pygame.K_RIGHT, pygame.K_d]:
                 player.dx += 1
-            elif event.key == pygame.K_LEFT:
+            elif event.key in [pygame.K_LEFT, pygame.K_a]:
                 player.dx -= 1
 
         elif event.type == pygame.KEYUP:
             # Adjust player velocity on keyup
-            if event.key == pygame.K_DOWN:
+            if event.key in [pygame.K_DOWN, pygame.K_s]:
                 player.dy -= 1
-            elif event.key == pygame.K_UP:
+            elif event.key in [pygame.K_UP, pygame.K_w]:
                 player.dy += 1
-            elif event.key == pygame.K_RIGHT:
+            elif event.key in [pygame.K_RIGHT, pygame.K_d]:
                 player.dx -= 1
-            elif event.key == pygame.K_LEFT:
+            elif event.key in [pygame.K_LEFT, pygame.K_a]:
                 player.dx += 1
 
     body.render(screen)
