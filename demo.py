@@ -1,8 +1,9 @@
 import pygame
-
+from bullets.body import Body
 
 BLACK = (0, 0, 0)
 
+body = Body((400, 400), 40, (0, 255, 255))
 
 game_over = False
 score = 0
@@ -28,6 +29,7 @@ collided = False
 while True:
     clock.tick(fps)
     screen.fill(BLACK)
+    body.render(screen)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
