@@ -1,5 +1,5 @@
-from .body import Body
+from .actor import Actor
 
 
-class Enemy(Body):
+class Enemy(Actor):
     pass

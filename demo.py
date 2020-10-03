@@ -4,6 +4,7 @@ from bullets.player import Player
 
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
+BLUE = (0, 0, 255)
 
 bullet = Bullet((400, 400), 31, (0, 255, 255))
 player = Player((400, 300), 40, (255, 255, 0))
@@ -68,10 +69,11 @@ while True:
             elif event.key in [pygame.K_LEFT, pygame.K_a]:
                 player.dx += 1
 
+    if player.is_offscreen(screen.get_width(), screen.get_height()):
+        screen.fill(BLUE)
+
     bullet.hit_player(player)
     bullet.render(screen)
     player.update()
     player.render(screen)
-
     pygame.display.update()
-    print(player.health)

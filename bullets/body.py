@@ -20,5 +20,19 @@ class Body:
         dist = ((self.x - body.x) ** 2 + (self.y - body.y) ** 2) ** 0.5
         return dist < self.radius + body.radius
 
-    def is_offscreen(self):
-        raise NotImplementedError
+    def is_offscreen(self, w, h, fully=True):
+        if not fully:
+            flag = (
+                self.x - self.radius < 0
+                or self.x + self.radius > w
+                or self.y - self.radius < 0
+                or self.y + self.radius > h
+            )
+        else:
+            flag = (
+                self.x + self.radius < 0
+                or self.x - self.radius > w
+                or self.y + self.radius < 0
+                or self.y - self.radius > h
+            )
+        return flag
