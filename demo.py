@@ -3,7 +3,9 @@ from bullets.body import Body
 
 BLACK = (0, 0, 0)
 
-body = Body((400, 400), 40, (0, 255, 255))
+body_a = Body((400, 400), 31, (0, 255, 255))
+body_b = Body((400, 300), 40, (255, 255, 0))
+
 
 game_over = False
 score = 0
@@ -28,8 +30,13 @@ clock = pygame.time.Clock()
 collided = False
 while True:
     clock.tick(fps)
-    screen.fill(BLACK)
-    body.render(screen)
+    if body_a.is_overlapping(body_b):
+        screen.fill(BLACK)
+    else:
+        screen.fill((255, 0, 0))
+    body_a.render(screen)
+    body_b.render(screen)
+    body_b.y += 1
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

@@ -16,5 +16,6 @@ class Body:
     def render(self, screen):
         pygame.draw.circle(screen, self.color, (self.x, self.y), self.radius)
 
-    def is_overlapping(self):
-        pass
+    def is_overlapping(self, body):
+        dist = ((self.x - body.x) ** 2 + (self.y - body.y) ** 2) ** 0.5
+        return dist < self.radius + body.radius
