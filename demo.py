@@ -1,11 +1,11 @@
 import pygame
-from bullets.body import Body
+from bullets.bullet import Bullet
 from bullets.player import Player
 
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 
-body = Body((400, 400), 31, (0, 255, 255))
+bullet = Bullet((400, 400), 31, (0, 255, 255))
 player = Player((400, 300), 40, (255, 255, 0))
 
 
@@ -34,7 +34,7 @@ while True:
     clock.tick(fps)
 
     # Red if hit
-    if not body.is_overlapping(player):
+    if not bullet.is_overlapping(player):
         screen.fill(BLACK)
     else:
         screen.fill(RED)
@@ -68,8 +68,10 @@ while True:
             elif event.key in [pygame.K_LEFT, pygame.K_a]:
                 player.dx += 1
 
-    body.render(screen)
+    bullet.hit_player(player)
+    bullet.render(screen)
     player.update()
     player.render(screen)
 
     pygame.display.update()
+    print(player.health)

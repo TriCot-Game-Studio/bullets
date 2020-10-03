@@ -19,3 +19,6 @@ class Body:
     def is_overlapping(self, body):
         dist = ((self.x - body.x) ** 2 + (self.y - body.y) ** 2) ** 0.5
         return dist < self.radius + body.radius
+
+    def is_offscreen(self):
+        raise NotImplementedError
