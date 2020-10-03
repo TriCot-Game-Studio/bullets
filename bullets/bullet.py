@@ -15,3 +15,6 @@ class Bullet(Body):
         if self.is_overlapping(player):
             for key, value in self.effects.items():
                 player.attributes[key] += value
+
+    def is_offscreen(self, w, h, fully=True):
+        return super().is_offscreen(w, h, fully=fully)

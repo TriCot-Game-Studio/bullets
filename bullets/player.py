@@ -1,7 +1,7 @@
-from .body import Body
+from .actor import Actor
 
 
-class Player(Body):
+class Player(Actor):
     def __init__(self, pos, radius, color):
         super().__init__(pos=pos, radius=radius, color=color)
         self.attributes = {"health": 1, "speed": 1}
