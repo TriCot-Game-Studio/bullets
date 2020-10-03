@@ -1,12 +1,12 @@
 import pygame
-from bullets.bullet import Bullet
+from bullets.bullet_patterns.circle import CirclePattern
 from bullets.player import Player
 
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 
-bullet = Bullet((400, 400), 31, (0, 255, 255))
+bullet_pattern = CirclePattern(20, (400, 400), 200)
 player = Player((400, 300), 40, (255, 255, 0))
 
 
@@ -33,12 +33,7 @@ clock = pygame.time.Clock()
 collided = False
 while True:
     clock.tick(fps)
-
-    # Red if hit
-    if not bullet.is_overlapping(player):
-        screen.fill(BLACK)
-    else:
-        screen.fill(RED)
+    screen.fill(BLACK)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -72,8 +67,8 @@ while True:
     if player.is_offscreen(screen.get_width(), screen.get_height()):
         screen.fill(BLUE)
 
-    bullet.hit_player(player)
-    bullet.render(screen)
+    bullet_pattern.hit_player(player)
+    bullet_pattern.render(screen)
     player.update()
     player.render(screen)
     pygame.display.update()
