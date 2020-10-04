@@ -4,16 +4,22 @@ from ..utils import map_range
 
 
 class CirclePattern(BulletPattern):
-    def __init__(self, n, pos, radius):
-        super().__init__(n)
+    def __init__(self, n, pos, radius, dx=0, dy=0, angle=0):
+        super().__init__(n, dx, dy)
         self.x, self.y = pos
         self.radius = radius
+        self.angle = angle
+        self.update_bullet_locations()
 
-        self._init_bullet_locations()
-
-    def _init_bullet_locations(self):
+    def update_bullet_locations(self):
         for i in range(self.n):
+            if self.bullets[i] is None:
+                continue
+
             angle = map_range(i, 0, self.n, 0, 2 * math.pi)
+
+            angle += self.angle
+
             x = math.cos(angle) * self.radius
             y = math.sin(angle) * self.radius
 
@@ -25,7 +31,10 @@ class CirclePattern(BulletPattern):
 
     def render(self, screen):
         for bullet in self.bullets:
-            bullet.render(screen)
+            if bullet is not None:
+                bullet.render(screen)
 
     def update(self):
-        pass
+        self.x += self.dx
+        self.y += self.dy
+        self.update_bullet_locations()
