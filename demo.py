@@ -6,13 +6,13 @@ BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 
-bullet_pattern = CirclePattern(20, (400, 400), 200)
-player = Player((400, 300), 40, (255, 255, 0))
-
+bullet_pattern = CirclePattern(n=18, pos=(0, 0), radius=-50, dx=1, dy=1)
+player = Player(pos=(400, 300), radius=15, color=(255, 255, 0))
 
 game_over = False
 score = 0
-display_size = (500, 500)
+display_size = (600, 600)
+WIDTH, HEIGHT = display_size
 fps = 30
 
 pygame.init()
@@ -64,11 +64,16 @@ while True:
             elif event.key in [pygame.K_LEFT, pygame.K_a]:
                 player.dx += 1
 
-    if player.is_offscreen(screen.get_width(), screen.get_height()):
+    if player.is_offscreen(WIDTH, HEIGHT):
         screen.fill(BLUE)
 
+    bullet_pattern.angle += 0.05
+    bullet_pattern.radius += 1
+
     bullet_pattern.hit_player(player)
+    bullet_pattern.update()
     bullet_pattern.render(screen)
-    player.update()
+
+    player.update(WIDTH, HEIGHT)
     player.render(screen)
     pygame.display.update()
