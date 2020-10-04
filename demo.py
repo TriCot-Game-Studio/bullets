@@ -64,8 +64,8 @@ while True:
             elif event.key in [pygame.K_LEFT, pygame.K_a]:
                 player.dx += 1
 
-    if player.is_offscreen(WIDTH, HEIGHT):
-        screen.fill(BLUE)
+    if not player.is_alive:
+        screen.fill(RED)
 
     bullet_pattern.angle += 0.05
     bullet_pattern.radius += 1

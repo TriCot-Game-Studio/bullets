@@ -14,6 +14,10 @@ class Player(Actor):
         self.dy = 0
 
     @property
+    def is_alive(self):
+        return self.attributes["health"] > 0
+
+    @property
     def speed(self):
         return self._speed * self.attributes["speed"]
 
