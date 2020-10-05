@@ -4,13 +4,16 @@ DEFAULT_EFFECTS = {"health": -0.1}
 
 
 class Bullet(Body):
-    def __init__(self, pos=(0, 0), radius=10, color=(255, 255, 255), effects=None):
+    def __init__(
+        self, pos=(0, 0), radius=10, color=(255, 255, 255), effects=None, bounce=False
+    ):
         super().__init__(pos=pos, radius=radius, color=color)
         if effects is None:
             effects = DEFAULT_EFFECTS
 
         self.effects = effects
         self.dead = False
+        self.bounce = bounce
 
     def render(self, screen):
         if not self.dead:

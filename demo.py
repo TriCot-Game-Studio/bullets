@@ -27,6 +27,7 @@ def _quit():
 screen = pygame.display.set_mode(display_size)
 pygame.display.set_caption("don't get hit")
 
+
 # YEP
 clock = pygame.time.Clock()
 
@@ -71,6 +72,8 @@ while True:
     bullet_pattern.radius += 1
 
     bullet_pattern.hit_player(player)
+    bullet_pattern.kill_strays(screen)
+
     bullet_pattern.update()
     bullet_pattern.render(screen)
 
