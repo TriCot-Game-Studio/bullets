@@ -2,11 +2,12 @@ from .bullet import Bullet
 
 
 class BulletPattern:
-    def __init__(self, n, dx=0, dy=0):
+    def __init__(self, n, dx=0, dy=0, bounce=False):
         self.dx = dx
         self.dy = dy
         self.n = n
         self.bullets = [Bullet() for _ in range(n)]
+        self.bounce = bounce
 
     def update_bullet_locations(self):
         raise NotImplementedError
@@ -25,3 +26,18 @@ class BulletPattern:
         for i in hit:
             # noinspection PyTypeChecker
             self.bullets[i] = None
+
+        # def bounce(screen_width, screen_height):
+        #     bullet.bounce(self, screen_width, screen_height)
+        #
+        # def bounce_or_die(self, bullet, x, y):
+        # if (
+        #     self.dx + bullet.radius < 0
+        #     or self.dx - bullet.radius > x
+        #     or self.dy + bullet.radius < 0
+        #     or self.dy - bullet.radius > y
+        # ):
+        #     if not bullet.bounce:
+        #         bullet.dead is True and bullet.render()
+        #     self.dx *= -1
+        #     self.dy *= -1
