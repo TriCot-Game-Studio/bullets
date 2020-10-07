@@ -29,17 +29,6 @@ class CirclePattern(BulletPattern):
             self.bullets[i].x = x
             self.bullets[i].y = y
 
-            current_x = self.bullets[i].x
-            current_y = self.bullets[i].y
-            prev_x = self.x
-            prev_y = self.y
-
-            bullet_dx = current_x - prev_x
-            bullet_dy = current_y - prev_y
-
-            if self.bullets[i].is_offscreen(600, 600, fully=False):
-                return
-
     def render(self, screen):
         for bullet in self.bullets:
             if bullet is not None:
