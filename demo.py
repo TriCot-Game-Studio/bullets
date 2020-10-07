@@ -27,7 +27,6 @@ def _quit():
 screen = pygame.display.set_mode(display_size)
 pygame.display.set_caption("don't get hit")
 
-
 # YEP
 clock = pygame.time.Clock()
 
