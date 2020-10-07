@@ -72,8 +72,6 @@ while True:
     bullet_pattern.radius += 1
 
     bullet_pattern.hit_player(player)
-    bullet_pattern.kill_strays(screen)
-
     bullet_pattern.update()
     bullet_pattern.render(screen)
 

@@ -29,6 +29,17 @@ class CirclePattern(BulletPattern):
             self.bullets[i].x = x
             self.bullets[i].y = y
 
+            current_x = self.bullets[i].x
+            current_y = self.bullets[i].y
+            prev_x = self.x
+            prev_y = self.y
+
+            bullet_dx = current_x - prev_x
+            bullet_dy = current_y - prev_y
+
+            if self.bullets[i].is_offscreen(600, 600, fully=False):
+                return
+
     def render(self, screen):
         for bullet in self.bullets:
             if bullet is not None:
@@ -38,25 +49,3 @@ class CirclePattern(BulletPattern):
         self.x += self.dx
         self.y += self.dy
         self.update_bullet_locations()
-
-    # def bounce_or_die(self, screen):
-    #     for bullet in self.bullets:
-    #         if self.dx < 0 or self.dx > 600 or self.dy < 0 or self.dy > 600:
-    #             if not bullet.bounce:
-    #                 bullet.render(screen)
-    #                 self.update_bullet_locations()
-    #             self.dx *= -1
-    #             self.dy *= -1
-    #         return
-
-    def kill_strays(self, screen):
-        strays = []
-        for j, bullets in enumerate(self.bullets):
-            if bullets is not None:
-                self.kill_strays(screen)
-                if bullets.dead:
-                    strays.append(j)
-
-        for j in strays:
-            # noinspection PyTypeChecker
-            self.bullets[j] = None

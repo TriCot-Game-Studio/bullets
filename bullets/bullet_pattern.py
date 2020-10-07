@@ -1,4 +1,3 @@
-from bullets import body
 from .bullet import Bullet
 
 
@@ -28,6 +27,9 @@ class BulletPattern:
             # noinspection PyTypeChecker
             self.bullets[i] = None
 
+        # def bounce(screen_width, screen_height):
+        #     bullet.bounce(self, screen_width, screen_height)
+        #
         # def bounce_or_die(self, bullet, x, y):
         # if (
         #     self.dx + bullet.radius < 0
