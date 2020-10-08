@@ -79,14 +79,14 @@ while True:
     if not player.is_alive:
         screen.fill(RED)
 
-    # bullet_pattern.angle += 0.05
-    # bullet_pattern.radius += 1
-    # bullet_pattern.hit_player(player)
-    # bullet_pattern.update()
-    # bullet_pattern.render(screen)
+    bullet_pattern.angle += 0.05
+    bullet_pattern.radius += 1
+    bullet_pattern.hit_player(player)
+    bullet_pattern.update()
+    bullet_pattern.render(screen)
 
-    bullet.move()
-    bullet.render(screen)
+    # bullet.move()
+    # bullet.render(screen)
 
     player.update(WIDTH, HEIGHT)
     player.render(screen)

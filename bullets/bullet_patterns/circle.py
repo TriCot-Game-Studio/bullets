@@ -11,49 +11,44 @@ class CirclePattern(BulletPattern):
         self.x, self.y = pos
         self.radius = radius
         self.angle = angle
+        self.pattern_broken = False
+        self.prev_x = 0
+        self.prev_y = 0
+
         self.update_bullet_locations()
 
     def update_bullet_locations(self):
-        for i in range(self.n):
-            if self.bullets[i] is None:
-                continue
+        if not self.pattern_broken:
+            for i in range(self.n):
+                if self.bullets[i] is None:
+                    continue
 
-            angle = map_range(i, 0, self.n, 0, 2 * math.pi)
+                angle = map_range(i, 0, self.n, 0, 2 * math.pi)
 
-            angle += self.angle
+                angle += self.angle
 
-            x = math.cos(angle) * self.radius
-            y = math.sin(angle) * self.radius
+                x = math.cos(angle) * self.radius
+                y = math.sin(angle) * self.radius
 
-            x += self.x
-            y += self.y
+                x += self.x
+                y += self.y
 
-            self.bullets[i].x = x
-            self.bullets[i].y = y
+                self.bullets[i].x = x
+                self.bullets[i].y = y
 
-            current_x = self.bullets[i].x
-            current_y = self.bullets[i].y
-            prev_x = self.x
-            prev_y = self.y
+                self.bullets[i].dx = self.bullets[i].x - self.prev_x
+                self.bullets[i].dy = self.bullets[i].y - self.prev_y
 
-            bullet_dx = current_x - prev_x
-            bullet_dy = current_y - prev_y
+                self.prev_x = self.bullets[i].x
+                self.prev_y = self.bullets[i].y
 
-            if not self.bullets[i].is_offscreen(600, 600, fully=False):
-                continue
-            else:
-                for j in range(self.n):
-                    self.bullets[j] = Bullet(
-                        (current_x, current_y),
-                        10,
-                        (30, 250, 250),
-                        None,
-                        bounces=True,
-                        dead=False,
-                        dx=bullet_dx,
-                        dy=bullet_dy,
-                    )
-                    self.bullets[j].move()
+                if self.bullets[i].is_offscreen(600, 600, fully=False):
+                    self.pattern_broken = True
+        else:
+            for i in range(self.n):
+                if self.bullets[i] is None:
+                    continue
+                self.bullets[i].move()
 
     def render(self, screen):
         for bullet in self.bullets:

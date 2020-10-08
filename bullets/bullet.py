@@ -25,8 +25,7 @@ class Bullet(Body):
         self.bounces = bounces
         self.dx = dx
         self.dy = dy
-        self.x += dx
-        self.y += dy
+        self.max_speed = 3
 
     def render(self, screen):
         if not self.dead:
