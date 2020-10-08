@@ -43,19 +43,21 @@ class Bullet(Body):
 
     def move(self):
         self.bounce()
+        if self.dx > self.max_speed:
+            self.dx = self.max_speed
+        elif self.dx < -self.max_speed:
+            self.dx = -self.max_speed
+
+        if self.dy > self.max_speed:
+            self.dy = self.max_speed
+        elif self.dy < -self.max_speed:
+            self.dy = -self.max_speed
+
         self.x += self.dx
         self.y += self.dy
 
     def bounce(self):
-        if (
-            self.x - self.radius < 0
-            or self.x + self.radius > 600
-            and self.bounces is True
-        ):
+        if (self.x - self.radius < 0 or self.x + self.radius > 600) and self.bounces:
             self.dx *= -1
-        if (
-            self.y - self.radius < 0
-            or self.y + self.radius > 600
-            and self.bounces is True
-        ):
+        if (self.y - self.radius < 0 or self.y + self.radius > 600) and self.bounces:
             self.dy *= -1

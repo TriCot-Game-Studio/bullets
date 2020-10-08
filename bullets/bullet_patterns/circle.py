@@ -29,7 +29,6 @@ class CirclePattern(BulletPattern):
 
                 x = math.cos(angle) * self.radius
                 y = math.sin(angle) * self.radius
-
                 x += self.x
                 y += self.y
 
