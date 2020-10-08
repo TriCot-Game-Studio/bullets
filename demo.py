@@ -1,4 +1,6 @@
 import pygame
+
+from bullets.bullet import Bullet
 from bullets.bullet_patterns.circle import CirclePattern
 from bullets.player import Player
 
@@ -7,6 +9,16 @@ RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 
 bullet_pattern = CirclePattern(n=18, pos=(300, 300), radius=-50, dx=1, dy=1)
+bullet = Bullet(
+    pos=(300, 300),
+    radius=15,
+    color=(255, 100, 50),
+    effects=None,
+    bounces=True,
+    dead=False,
+    dx=3,
+    dy=2,
+)
 player = Player(pos=(400, 300), radius=15, color=(255, 255, 0))
 
 game_over = False
@@ -67,12 +79,14 @@ while True:
     if not player.is_alive:
         screen.fill(RED)
 
-    bullet_pattern.angle += 0.05
-    bullet_pattern.radius += 1
+    # bullet_pattern.angle += 0.05
+    # bullet_pattern.radius += 1
+    # bullet_pattern.hit_player(player)
+    # bullet_pattern.update()
+    # bullet_pattern.render(screen)
 
-    bullet_pattern.hit_player(player)
-    bullet_pattern.update()
-    bullet_pattern.render(screen)
+    bullet.move()
+    bullet.render(screen)
 
     player.update(WIDTH, HEIGHT)
     player.render(screen)

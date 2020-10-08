@@ -44,15 +44,16 @@ class CirclePattern(BulletPattern):
             else:
                 for j in range(self.n):
                     self.bullets[j] = Bullet(
-                        (self.bullets[i].x, self.bullets[i].y),
+                        (current_x, current_y),
                         10,
                         (30, 250, 250),
                         None,
-                        bounce=True,
+                        bounces=True,
                         dead=False,
-                        dx=current_x,
-                        dy=current_y,
+                        dx=bullet_dx,
+                        dy=bullet_dy,
                     )
+                    self.bullets[j].move()
 
     def render(self, screen):
         for bullet in self.bullets:

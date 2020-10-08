@@ -10,7 +10,7 @@ class Bullet(Body):
         radius=10,
         color=(255, 255, 255),
         effects=None,
-        bounce=True,
+        bounces=True,
         dead=False,
         dx=0,
         dy=0,
@@ -22,9 +22,11 @@ class Bullet(Body):
         self.x, self.y = pos
         self.effects = effects
         self.dead = dead
-        self.bounce = bounce
+        self.bounces = bounces
         self.dx = dx
         self.dy = dy
+        self.x += dx
+        self.y += dy
 
     def render(self, screen):
         if not self.dead:
@@ -40,16 +42,21 @@ class Bullet(Body):
     def is_offscreen(self, w, h, fully=True):
         return super().is_offscreen(w, h, fully=fully)
 
+    def move(self):
+        self.bounce()
+        self.x += self.dx
+        self.y += self.dy
+
     def bounce(self):
         if (
-            self.x + self.radius < 0
-            or self.x - self.radius > 600
-            and self.bounce is True
+            self.x - self.radius < 0
+            or self.x + self.radius > 600
+            and self.bounces is True
         ):
-            self.x *= -1
+            self.dx *= -1
         if (
-            self.y + self.radius < 0
-            or self.y - self.radius > 600
-            and self.bounce is True
+            self.y - self.radius < 0
+            or self.y + self.radius > 600
+            and self.bounces is True
         ):
-            self.y *= -1
+            self.dy *= -1
