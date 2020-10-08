@@ -6,7 +6,7 @@ BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 
-bullet_pattern = CirclePattern(n=18, pos=(0, 0), radius=-50, dx=1, dy=1)
+bullet_pattern = CirclePattern(n=18, pos=(300, 300), radius=-50, dx=1, dy=1)
 player = Player(pos=(400, 300), radius=15, color=(255, 255, 0))
 
 game_over = False

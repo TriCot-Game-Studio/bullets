@@ -1,4 +1,6 @@
 import math
+
+from ..bullet import Bullet
 from ..bullet_pattern import BulletPattern
 from ..utils import map_range
 
@@ -37,8 +39,20 @@ class CirclePattern(BulletPattern):
             bullet_dx = current_x - prev_x
             bullet_dy = current_y - prev_y
 
-            if self.bullets[i].is_offscreen(600, 600, fully=False):
-                return
+            if not self.bullets[i].is_offscreen(600, 600, fully=False):
+                continue
+            else:
+                for j in range(self.n):
+                    self.bullets[j] = Bullet(
+                        (self.bullets[i].x, self.bullets[i].y),
+                        10,
+                        (30, 250, 250),
+                        None,
+                        bounce=True,
+                        dead=False,
+                        dx=current_x,
+                        dy=current_y,
+                    )
 
     def render(self, screen):
         for bullet in self.bullets:

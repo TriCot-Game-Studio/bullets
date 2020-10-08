@@ -6,7 +6,7 @@ DEFAULT_EFFECTS = {"health": -0.1}
 class Bullet(Body):
     def __init__(
         self,
-        pos=(0, 0),
+        pos=(100, 100),
         radius=10,
         color=(255, 255, 255),
         effects=None,
