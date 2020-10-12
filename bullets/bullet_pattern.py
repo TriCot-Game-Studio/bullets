@@ -2,11 +2,12 @@ from .bullet import Bullet
 
 
 class BulletPattern:
-    def __init__(self, n, dx=0, dy=0):
+    def __init__(self, n, dx=0, dy=0, bounce=False):
         self.dx = dx
         self.dy = dy
         self.n = n
         self.bullets = [Bullet() for _ in range(n)]
+        self.bounce = bounce
 
     def update_bullet_locations(self):
         raise NotImplementedError
