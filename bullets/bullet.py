@@ -22,10 +22,14 @@ class Bullet(Body):
         self.x, self.y = pos
         self.effects = effects
         self.dead = dead
-        self.bounces = bounces
+
         self.dx = dx
         self.dy = dy
         self.max_speed = 3
+
+        self.bounces = bounces
+        self.n_bounces = 0
+        self.max_bounces = 2
 
     def render(self, screen):
         if not self.dead:
@@ -57,7 +61,12 @@ class Bullet(Body):
         self.y += self.dy
 
     def bounce(self):
-        if (self.x - self.radius < 0 or self.x + self.radius > 600) and self.bounces:
+        if not self.bounces or self.n_bounces >= self.max_bounces:
+            return
+
+        if self.x - self.radius < 0 or self.x + self.radius > 600:
             self.dx *= -1
-        if (self.y - self.radius < 0 or self.y + self.radius > 600) and self.bounces:
+            self.n_bounces += 1
+        if self.y - self.radius < 0 or self.y + self.radius > 600:
             self.dy *= -1
+            self.n_bounces += 1
