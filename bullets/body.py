@@ -23,7 +23,7 @@ class Body:
                 new_w = w * new_h / h
             else:
                 new_w = radius * 2.1
-                new_h = h * new_w / h
+                new_h = h * new_w / w
 
             self.img = pygame.transform.scale(img, (round(new_w), round(new_h)))
         else:
