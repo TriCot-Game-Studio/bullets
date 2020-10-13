@@ -10,6 +10,7 @@ RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 
 player_img = pygame.image.load("assets/imgs/gunny.png")
+bullet_img = pygame.image.load("assets/imgs/bullet.png")
 
 bullet_pattern = CirclePattern(n=18, pos=(300, 300), radius=-50, dx=1, dy=1)
 bullet = Bullet(
@@ -22,7 +23,13 @@ bullet = Bullet(
     dx=3,
     dy=2,
 )
-player = Player(pos=(400, 300), radius=30, color=(255, 255, 0), img=player_img)
+player = Player(
+    pos=(400, 300),
+    radius=30,
+    color=(255, 255, 0),
+    img=player_img,
+    bullet_img=bullet_img,
+)
 
 game_over = False
 score = 0
@@ -45,7 +52,6 @@ pygame.display.set_caption("don't get hit")
 # YEP
 clock = pygame.time.Clock()
 
-collided = False
 while True:
     clock.tick(fps)
     screen.fill(GRAY)
@@ -53,6 +59,11 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             _quit()
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            player.is_shooting = True
+        elif event.type == pygame.MOUSEBUTTONUP:
+            player.is_shooting = False
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
@@ -67,6 +78,8 @@ while True:
                 player.dx += 1
             elif event.key in [pygame.K_LEFT, pygame.K_a]:
                 player.dx -= 1
+            elif event.key in [pygame.K_SPACE]:
+                player.is_shooting = True
 
         elif event.type == pygame.KEYUP:
             # Adjust player velocity on keyup
@@ -78,6 +91,8 @@ while True:
                 player.dx -= 1
             elif event.key in [pygame.K_LEFT, pygame.K_a]:
                 player.dx += 1
+            elif event.key in [pygame.K_SPACE]:
+                player.is_shooting = False
 
     if not player.is_alive:
         screen.fill(RED)
