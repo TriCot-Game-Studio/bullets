@@ -47,7 +47,7 @@ class CirclePattern(BulletPattern):
             for i in range(self.n):
                 if self.bullets[i] is None:
                     continue
-                self.bullets[i].move()
+                self.bullets[i].update()
 
     def render(self, screen):
         for bullet in self.bullets:
