@@ -2,8 +2,8 @@ from .body import Body
 
 
 class Actor(Body):
-    def __init__(self, pos, radius, color):
-        super().__init__(pos=pos, radius=radius, color=color)
+    def __init__(self, pos, radius, color, img=None):
+        super().__init__(pos=pos, radius=radius, color=color, img=img)
 
         self._speed = 2
 

@@ -1,9 +1,11 @@
+import math
+import pygame
 from .actor import Actor
 
 
 class Player(Actor):
-    def __init__(self, pos, radius, color):
-        super().__init__(pos=pos, radius=radius, color=color)
+    def __init__(self, pos, radius, color, img=None):
+        super().__init__(pos=pos, radius=radius, color=color, img=img)
         self.attributes = {"health": 1, "speed": 1}
 
         self._speed = 10
@@ -37,15 +39,21 @@ class Player(Actor):
         self.x += self.dx * self.speed
         self.y += self.dy * self.speed
 
-        if not self.is_offscreen(w, h):
-            return
+        if self.is_offscreen(w, h):
+            if self.x < self.radius:
+                self.x = self.radius
+            elif self.x > w - self.radius:
+                self.x = w - self.radius
 
-        if self.x < self.radius:
-            self.x = self.radius
-        elif self.x > w - self.radius:
-            self.x = w - self.radius
+            if self.y < self.radius:
+                self.y = self.radius
+            elif self.y > h - self.radius:
+                self.y = h - self.radius
 
-        if self.y < self.radius:
-            self.y = self.radius
-        elif self.y > h - self.radius:
-            self.y = h - self.radius
+        # update angle for pointing asset/shooting
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+
+        # SOH CAH TOA
+        opposite = self.y - mouse_y
+        adjacent = self.x - mouse_x
+        self.angle = 180 - math.degrees(math.atan2(opposite, adjacent))

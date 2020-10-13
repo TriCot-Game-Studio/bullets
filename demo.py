@@ -5,8 +5,11 @@ from bullets.bullet_patterns.circle import CirclePattern
 from bullets.player import Player
 
 BLACK = (0, 0, 0)
+GRAY = (100, 100, 100)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
+
+player_img = pygame.image.load("assets/imgs/gunny.png")
 
 bullet_pattern = CirclePattern(n=18, pos=(300, 300), radius=-50, dx=1, dy=1)
 bullet = Bullet(
@@ -19,7 +22,7 @@ bullet = Bullet(
     dx=3,
     dy=2,
 )
-player = Player(pos=(400, 300), radius=15, color=(255, 255, 0))
+player = Player(pos=(400, 300), radius=30, color=(255, 255, 0), img=player_img)
 
 game_over = False
 score = 0
@@ -45,7 +48,7 @@ clock = pygame.time.Clock()
 collided = False
 while True:
     clock.tick(fps)
-    screen.fill(BLACK)
+    screen.fill(GRAY)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

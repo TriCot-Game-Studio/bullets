@@ -2,8 +2,8 @@ from .actor import Actor
 
 
 class Enemy(Actor):
-    def __init__(self, pos, radius, color, max_health, pcb1, pcb2, pcb3):
-        super().__init__(pos=pos, radius=radius, color=color)
+    def __init__(self, pos, radius, color, max_health, pcb1, pcb2, pcb3, img=None):
+        super().__init__(pos=pos, radius=radius, color=color, img=img)
         self.health = max_health
         self.max_health = max_health
         self.phase = 0
