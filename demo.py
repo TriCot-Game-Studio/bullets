@@ -11,8 +11,11 @@ BLUE = (0, 0, 255)
 
 player_img = pygame.image.load("assets/imgs/gunny.png")
 bullet_img = pygame.image.load("assets/imgs/bullet.png")
+enemy_img = pygame.image.load("assets/imgs/skull_enemy.png")
 
-bullet_pattern = CirclePattern(n=18, pos=(300, 300), radius=-50, dx=1, dy=1)
+bullet_pattern = CirclePattern(
+    n=18, pos=(300, 300), radius=0, dx=1, dy=1, bullet_img=enemy_img
+)
 bullet = Bullet(
     pos=(300, 300),
     radius=15,

@@ -7,7 +7,7 @@ class Bullet(Body):
     def __init__(
         self,
         pos=(100, 100),
-        radius=10,
+        radius=20,
         color=(255, 255, 255),
         effects=None,
         bounces=True,
