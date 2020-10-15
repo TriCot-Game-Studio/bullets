@@ -48,24 +48,25 @@ class Bullet(Body):
         return super().is_offscreen(w, h, fully=fully)
 
     def update(self):
-        self.bounce()
-        if self.dx > self.max_speed:
-            self.dx = self.max_speed
-        elif self.dx < -self.max_speed:
-            self.dx = -self.max_speed
+        if not self.dead:
+            self.bounce()
+            if self.dx > self.max_speed:
+                self.dx = self.max_speed
+            elif self.dx < -self.max_speed:
+                self.dx = -self.max_speed
 
-        if self.dy > self.max_speed:
-            self.dy = self.max_speed
-        elif self.dy < -self.max_speed:
-            self.dy = -self.max_speed
+            if self.dy > self.max_speed:
+                self.dy = self.max_speed
+            elif self.dy < -self.max_speed:
+                self.dy = -self.max_speed
 
-        self.x += self.dx
-        self.y += self.dy
+            self.x += self.dx
+            self.y += self.dy
 
-        # TODO: every 600 in here is really bad,
-        #  unless we decide the screen
-        #  should *always* be 600 by 600
-        self.dead = self.is_offscreen(600, 600)
+            # TODO: every 600 in here is really bad,
+            #  unless we decide the screen
+            #  should *always* be 600 by 600
+            self.dead = self.is_offscreen(600, 600)
 
     def bounce(self):
         if not self.bounces or self.n_bounces >= self.max_bounces:
