@@ -29,6 +29,7 @@ class BulletPattern:
                         ):
                             bullet.dead = True
                             player_bullet.dead = True
+                            player.kill_counter += 1
                             hit.append(i)
 
         for i in hit:

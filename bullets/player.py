@@ -19,6 +19,8 @@ class Player(Actor):
         self.t_since_last_shot = 0
         self.bullet_img = bullet_img
 
+        self.kill_counter = 0
+
         # TODO: should this be in base Body class for other Body objects?
         self.dx = 0
         self.dy = 0
