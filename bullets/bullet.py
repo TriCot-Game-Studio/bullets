@@ -7,15 +7,17 @@ class Bullet(Body):
     def __init__(
         self,
         pos=(100, 100),
-        radius=10,
+        radius=20,
         color=(255, 255, 255),
         effects=None,
         bounces=True,
         dead=False,
         dx=0,
         dy=0,
+        img=None,
+        angle=0,
     ):
-        super().__init__(pos=pos, radius=radius, color=color)
+        super().__init__(pos=pos, radius=radius, color=color, img=img, angle=angle)
         if effects is None:
             effects = DEFAULT_EFFECTS
 
@@ -45,7 +47,7 @@ class Bullet(Body):
     def is_offscreen(self, w, h, fully=True):
         return super().is_offscreen(w, h, fully=fully)
 
-    def move(self):
+    def update(self):
         self.bounce()
         if self.dx > self.max_speed:
             self.dx = self.max_speed
@@ -59,6 +61,11 @@ class Bullet(Body):
 
         self.x += self.dx
         self.y += self.dy
+
+        # TODO: every 600 in here is really bad,
+        #  unless we decide the screen
+        #  should *always* be 600 by 600
+        self.dead = self.is_offscreen(600, 600)
 
     def bounce(self):
         if not self.bounces or self.n_bounces >= self.max_bounces:

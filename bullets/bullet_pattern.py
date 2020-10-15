@@ -2,11 +2,11 @@ from .bullet import Bullet
 
 
 class BulletPattern:
-    def __init__(self, n, dx=0, dy=0, bounce=False):
+    def __init__(self, n, dx=0, dy=0, bounce=False, bullet_img=None):
         self.dx = dx
         self.dy = dy
         self.n = n
-        self.bullets = [Bullet() for _ in range(n)]
+        self.bullets = [Bullet(img=bullet_img) for _ in range(n)]
         self.bounce = bounce
 
     def update_bullet_locations(self):

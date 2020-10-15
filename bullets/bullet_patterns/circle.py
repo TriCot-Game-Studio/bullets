@@ -6,8 +6,8 @@ from ..utils import map_range
 
 
 class CirclePattern(BulletPattern):
-    def __init__(self, n, pos, radius, dx=0, dy=0, angle=0):
-        super().__init__(n, dx, dy)
+    def __init__(self, n, pos, radius, dx=0, dy=0, angle=0, bullet_img=None):
+        super().__init__(n, dx, dy, bullet_img=bullet_img)
         self.x, self.y = pos
         self.radius = radius
         self.angle = angle
@@ -47,7 +47,7 @@ class CirclePattern(BulletPattern):
             for i in range(self.n):
                 if self.bullets[i] is None:
                     continue
-                self.bullets[i].move()
+                self.bullets[i].update()
 
     def render(self, screen):
         for bullet in self.bullets:
