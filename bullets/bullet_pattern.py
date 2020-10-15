@@ -22,6 +22,15 @@ class BulletPattern:
                 bullet.hit_player(player)
                 if bullet.dead:
                     hit.append(i)
+                else:
+                    for player_bullet in player.bullets:
+                        if not player_bullet.dead and bullet.is_overlapping(
+                            player_bullet
+                        ):
+                            bullet.dead = True
+                            player_bullet.dead = True
+                            player.kill_counter += 1
+                            hit.append(i)
 
         for i in hit:
             # noinspection PyTypeChecker

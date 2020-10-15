@@ -19,6 +19,8 @@ class Player(Actor):
         self.t_since_last_shot = 0
         self.bullet_img = bullet_img
 
+        self.kill_counter = 0
+
         # TODO: should this be in base Body class for other Body objects?
         self.dx = 0
         self.dy = 0
@@ -44,14 +46,11 @@ class Player(Actor):
         self.attributes["health"] += x / 100
 
     def _update_shot_bullets(self):
-        dead = []
         for i, bullet in enumerate(self.bullets):
             bullet.update()
-            if bullet.dead:
-                dead.append(i)
 
-        for i in dead:
-            self.bullets.pop(i)
+    def _prune_dead_bullets(self):
+        self.bullets = [b for b in self.bullets if not b.dead]
 
     def _shoot(self):
         if self.t_since_last_shot > self.shoot_cool_down:
@@ -78,6 +77,7 @@ class Player(Actor):
         if self.is_shooting:
             self._shoot()
 
+        self._prune_dead_bullets()
         self._update_shot_bullets()
         self.t_since_last_shot += 1
 

@@ -46,6 +46,7 @@ pygame.init()
 def _quit():
     pygame.display.quit()
     pygame.quit()
+    print(f"GAME OVER\nkills: {player.kill_counter}")
     quit()
 
 
