@@ -6,7 +6,7 @@ class BulletPattern:
         self.dx = dx
         self.dy = dy
         self.n = n
-        self.bullets = [Bullet(img=bullet_img) for _ in range(n)]
+        self.bullets = [Bullet(img=bullet_img, is_enemy=True) for _ in range(n)]
         self.bounce = bounce
 
     def update_bullet_locations(self):
