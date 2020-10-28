@@ -16,6 +16,8 @@ class Bullet(Body):
         dy=0,
         img=None,
         angle=0,
+        is_enemy=False,
+        face=False,
     ):
         super().__init__(pos=pos, radius=radius, color=color, img=img, angle=angle)
         if effects is None:
@@ -35,7 +37,7 @@ class Bullet(Body):
 
     def render(self, screen):
         if not self.dead:
-            super().render(screen)
+            super().render(screen, self.face)
 
     def hit_player(self, player):
         if self.is_overlapping(player) and not self.dead:
@@ -54,7 +56,7 @@ class Bullet(Body):
                 self.dx = self.max_speed
             elif self.dx < -self.max_speed:
                 self.dx = -self.max_speed
-
+            
             if self.dy > self.max_speed:
                 self.dy = self.max_speed
             elif self.dy < -self.max_speed:
@@ -62,7 +64,14 @@ class Bullet(Body):
 
             self.x += self.dx
             self.y += self.dy
-
+            if self.is_enemy = True:
+                if self.dx >= 0:
+                    self.face = False
+                elif self.dx < 0:
+                    self.face = True
+            else: 
+                self.face = None
+                
             # TODO: every 600 in here is really bad,
             #  unless we decide the screen
             #  should *always* be 600 by 600
