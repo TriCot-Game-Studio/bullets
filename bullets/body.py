@@ -29,9 +29,25 @@ class Body:
         else:
             self.img = None
 
-    def render(self, screen):
+    def render(self, screen, bullface=None):
         if self.img is None:
             pygame.draw.circle(screen, self.color, (self.x, self.y), self.radius)
+        
+        elif bullface is not None:
+            if bullface == True:
+                w, h = self.img.get_size()
+                flip_img = pygame.transform.flip(self.img, True, False)
+                screen.blit(flip_img, (self.x - w // 2, self.y - h // 2))
+            
+            elif bullface == False:
+                w, h = self.img.get_size()
+                screen.blit(self.img, (self.x - w // 2, self.y - h // 2))
+            
+            else:
+                w, h = self.img.get_size()
+                rot_image = pygame.transform.rotate(self.img, self.angle)
+                screen.blit(rot_image, (self.x - w // 2, self.y - h // 2))
+        
         else:
             # For debug
             # TODO: delete me or add a DEBUG flag or something
