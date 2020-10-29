@@ -2,11 +2,12 @@ from .bullet import Bullet
 
 
 class BulletPattern:
-    def __init__(self, n, dx=0, dy=0):
+    def __init__(self, n, dx=0, dy=0, bounce=False, bullet_img=None):
         self.dx = dx
         self.dy = dy
         self.n = n
-        self.bullets = [Bullet() for _ in range(n)]
+        self.bullets = [Bullet(img=bullet_img) for _ in range(n)]
+        self.bounce = bounce
 
     def update_bullet_locations(self):
         raise NotImplementedError
@@ -21,6 +22,15 @@ class BulletPattern:
                 bullet.hit_player(player)
                 if bullet.dead:
                     hit.append(i)
+                else:
+                    for player_bullet in player.bullets:
+                        if not player_bullet.dead and bullet.is_overlapping(
+                            player_bullet
+                        ):
+                            bullet.dead = True
+                            player_bullet.dead = True
+                            player.kill_counter += 1
+                            hit.append(i)
 
         for i in hit:
             # noinspection PyTypeChecker
