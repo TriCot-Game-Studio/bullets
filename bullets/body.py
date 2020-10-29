@@ -35,10 +35,12 @@ class Body:
         
         elif bullface is not None:
             if bullface == True:
+                w, h = self.img.get_size()
                 flip_img = pygame.transform.flip(self.img, True, False)
                 screen.blit(flip_img, (self.x - w // 2, self.y - h // 2))
             
             elif bullface == False:
+                w, h = self.img.get_size()
                 screen.blit(self.img, (self.x - w // 2, self.y - h // 2))
             
             else:

@@ -34,6 +34,8 @@ class Bullet(Body):
         self.bounces = bounces
         self.n_bounces = 0
         self.max_bounces = 2
+        self.face = face
+        self.is_enemy = is_enemy
 
     def render(self, screen):
         if not self.dead:
@@ -64,7 +66,7 @@ class Bullet(Body):
 
             self.x += self.dx
             self.y += self.dy
-            if self.is_enemy = True:
+            if self.is_enemy == True:
                 if self.dx >= 0:
                     self.face = False
                 elif self.dx < 0:
