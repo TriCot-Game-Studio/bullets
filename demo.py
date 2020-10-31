@@ -59,6 +59,9 @@ clock = pygame.time.Clock()
 while True:
     clock.tick(fps)
     screen.fill(GRAY)
+    pygame.draw.rect(screen,BLACK,(10,10,206,31))
+    phealth = player.health*2
+    pygame.draw.rect(screen,RED,(13,13,phealth,25))
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
